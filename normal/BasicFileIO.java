@@ -1,5 +1,3 @@
-package normal;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +5,12 @@ import java.util.Scanner;
 
 /**
  * Demonstrates basic file operations using the legacy java.io package.
+ * 
+ * HOW TO RUN:
+ * 1. Open terminal in this folder.
+ * 2. Compile: javac BasicFileIO.java
+ * 3. Run:     java BasicFileIO
+ * 
  * Concepts covered:
  * 1. Creating a File object
  * 2. Creating a physical file
@@ -17,45 +21,49 @@ import java.util.Scanner;
 public class BasicFileIO {
 
     public static void main(String[] args) {
-        // Define the file path (relative to the project root or absolute)
+        // Define the file path (relative to the current working directory)
         String fileName = "example_basic.txt";
         File file = new File(fileName);
+
+        System.out.println("--- Basic File I/O Example ---");
 
         try {
             // 1. Create a new file
             if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
+                System.out.println("1. File created: " + file.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("1. File already exists: " + file.getName());
             }
 
             // 2. Write to the file
             // FileWriter(file, false) overwrites. Use true for append mode.
             FileWriter writer = new FileWriter(file);
             writer.write("Hello, this is a basic file I/O example.\n");
-            writer.write("Writing data using FileWriter is simple.");
+            writer.write("Writing data using FileWriter is simple and effective.");
             writer.close(); // Always close streams!
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("2. Successfully wrote to the file.");
 
             // 3. Read from the file
-            System.out.println("\nReading file content:");
+            System.out.println("3. Reading file content:");
+            System.out.println("--------------------------");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
                 System.out.println(data);
             }
             scanner.close();
+            System.out.println("--------------------------");
 
             // 4. Get file information
-            System.out.println("\nFile Information:");
-            System.out.println("Absolute Path: " + file.getAbsolutePath());
-            System.out.println("Size: " + file.length() + " bytes");
+            System.out.println("4. File Information:");
+            System.out.println("   Absolute Path: " + file.getAbsolutePath());
+            System.out.println("   Size: " + file.length() + " bytes");
 
             // 5. Delete the file (optional cleanup)
             // if (file.delete()) {
-            //     System.out.println("Deleted the file: " + file.getName());
+            //     System.out.println("5. Deleted the file: " + file.getName());
             // } else {
-            //     System.out.println("Failed to delete the file.");
+            //     System.out.println("5. Failed to delete the file.");
             // }
 
         } catch (IOException e) {

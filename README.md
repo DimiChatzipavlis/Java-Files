@@ -64,7 +64,7 @@ This file demonstrates how to traverse directory structures recursively, which i
 
 ## How to Run the Examples
 
-You can run these files using the command line or a terminal in VS Code.
+You can run these files using the command line or a terminal in VS Code. The files have been simplified to run directly from their folders without complex package commands.
 
 ### Prerequisites
 *   Ensure you have the **Java Development Kit (JDK)** installed.
@@ -76,34 +76,30 @@ You can run these files using the command line or a terminal in VS Code.
     ```powershell
     cd normal
     ```
-2.  Compile the Java file:
+2.  Compile and Run:
     ```powershell
     javac BasicFileIO.java
-    ```
-3.  Run the compiled class (ensure you use the package name if defined, or run from root):
-    *   *Since the file has `package normal;`, it is best run from the root folder.*
-    
-    **Correct Flow (from root `Java-Files` folder):**
-    ```powershell
-    javac normal/BasicFileIO.java
-    java normal.BasicFileIO
+    java BasicFileIO
     ```
 
 ### Running the Advanced Examples
 
-1.  Ensure you are in the root `Java-Files` directory.
-2.  Compile the advanced files:
+1.  Navigate to the `advanced` directory:
     ```powershell
-    javac advanced/ModernFileIO.java
-    javac advanced/FileTreeWalker.java
+    cd advanced
     ```
-3.  Run the classes:
+2.  Compile and Run ModernFileIO:
     ```powershell
-    java advanced.ModernFileIO
-    java advanced.FileTreeWalker
+    javac ModernFileIO.java
+    java ModernFileIO
+    ```
+3.  Compile and Run FileTreeWalker:
+    ```powershell
+    javac FileTreeWalker.java
+    java FileTreeWalker
     ```
 
 ### Inspecting Output
-*   After running `BasicFileIO`, look for a new file named `example_basic.txt` in your directory.
-*   After running `ModernFileIO`, look for `example_nio.txt` and `example_nio_copy.txt`.
-*   Open these text files to verify the content was written correctly.
+*   **BasicFileIO**: Look for `example_basic.txt` in the `normal` folder.
+*   **ModernFileIO**: Look for `example_nio.txt` and `example_nio_copy.txt` in the `advanced` folder.
+*   **FileTreeWalker**: Check the terminal output for a list of files in the current directory.
