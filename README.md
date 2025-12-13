@@ -7,7 +7,10 @@ This repository contains a collection of Java examples demonstrating File I/O op
 ```
 Java-Files/
 ├── normal/
-│   └── BasicFileIO.java      # Legacy java.io examples (File, FileWriter, Scanner)
+│   ├── BasicFileIO.java      # Legacy java.io examples (File, FileWriter, Scanner)
+│   ├── BufferedIO.java       # Efficient reading/writing (BufferedReader, BufferedWriter)
+│   ├── SerializationIO.java  # Saving objects to files (ObjectOutputStream)
+│   └── PropertiesIO.java     # Managing configuration files (Properties)
 ├── advanced/
 │   ├── ModernFileIO.java     # Modern java.nio.file examples (Path, Files)
 │   └── FileTreeWalker.java   # Recursive directory traversal (SimpleFileVisitor)
@@ -22,15 +25,23 @@ The `normal` directory contains examples using the traditional `java.io` package
 
 ### `BasicFileIO.java`
 This file demonstrates the fundamental building blocks of file handling.
-*   **Key Concepts:**
-    *   `java.io.File`: Represents a file or directory path name.
-    *   `java.io.FileWriter`: Used for writing character streams to a file.
-    *   `java.util.Scanner`: Used for parsing primitive types and strings (reading the file).
-*   **What it does:**
-    1.  Creates a new file named `example_basic.txt`.
-    2.  Writes a simple string message to it.
-    3.  Reads the content back line-by-line and prints it to the console.
-    4.  Displays file metadata like absolute path and size.
+*   **Key Concepts:** `File`, `FileWriter`, `Scanner`.
+*   **What it does:** Creates a file, writes text, and reads it back.
+
+### `BufferedIO.java`
+This file demonstrates how to improve I/O performance by reducing disk access.
+*   **Key Concepts:** `BufferedReader`, `BufferedWriter`.
+*   **What it does:** Writes multiple lines efficiently and reads them back line-by-line.
+
+### `SerializationIO.java`
+This file demonstrates how to save entire Java objects to a file and restore them later.
+*   **Key Concepts:** `Serializable`, `ObjectOutputStream`, `ObjectInputStream`.
+*   **What it does:** Saves a `User` object to a binary file and loads it back.
+
+### `PropertiesIO.java`
+This file demonstrates how to handle configuration files (key-value pairs).
+*   **Key Concepts:** `java.util.Properties`.
+*   **What it does:** Saves application settings to a `.properties` file and reads them.
 
 ---
 
@@ -76,10 +87,25 @@ You can run these files using the command line or a terminal in VS Code. The fil
     ```powershell
     cd normal
     ```
-2.  Compile and Run:
+2.  Compile and Run **BasicFileIO**:
     ```powershell
     javac BasicFileIO.java
     java BasicFileIO
+    ```
+3.  Compile and Run **BufferedIO**:
+    ```powershell
+    javac BufferedIO.java
+    java BufferedIO
+    ```
+4.  Compile and Run **SerializationIO**:
+    ```powershell
+    javac SerializationIO.java
+    java SerializationIO
+    ```
+5.  Compile and Run **PropertiesIO**:
+    ```powershell
+    javac PropertiesIO.java
+    java PropertiesIO
     ```
 
 ### Running the Advanced Examples
