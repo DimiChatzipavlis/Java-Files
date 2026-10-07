@@ -20,7 +20,9 @@ import java.io.Serializable;
  */
 public class SerializationIO {
 
-    // Inner class must implement Serializable to be saved
+    // Static nested class: it must implement Serializable to be saved.
+    // It is 'static' on purpose: a non-static inner class keeps a hidden reference
+    // to the outer SerializationIO object, which is not Serializable.
     static class User implements Serializable {
         private static final long serialVersionUID = 1L;
         String name;

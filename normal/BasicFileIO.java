@@ -37,21 +37,23 @@ public class BasicFileIO {
 
             // 2. Write to the file
             // FileWriter(file, false) overwrites. Use true for append mode.
-            FileWriter writer = new FileWriter(file);
-            writer.write("Hello, this is a basic file I/O example.\n");
-            writer.write("Writing data using FileWriter is simple and effective.");
-            writer.close(); // Always close streams!
+            // Always close streams! try-with-resources closes the writer automatically,
+            // even if write() throws an exception.
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write("Hello, this is a basic file I/O example.\n");
+                writer.write("Writing data using FileWriter is simple and effective.");
+            }
             System.out.println("2. Successfully wrote to the file.");
 
             // 3. Read from the file
             System.out.println("3. Reading file content:");
             System.out.println("--------------------------");
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                System.out.println(data);
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    String data = scanner.nextLine();
+                    System.out.println(data);
+                }
             }
-            scanner.close();
             System.out.println("--------------------------");
 
             // 4. Get file information
@@ -60,6 +62,8 @@ public class BasicFileIO {
             System.out.println("   Size: " + file.length() + " bytes");
 
             // 5. Delete the file (optional cleanup)
+            // Left commented out so you can open example_basic.txt after the run;
+            // uncomment it to see File.delete() in action.
             // if (file.delete()) {
             //     System.out.println("5. Deleted the file: " + file.getName());
             // } else {

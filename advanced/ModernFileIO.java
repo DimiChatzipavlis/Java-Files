@@ -1,4 +1,7 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,19 +37,21 @@ public class ModernFileIO {
         try {
             // 1. Write content to file
             // Files.write handles opening and closing resources automatically
+            // Encode as UTF-8 explicitly: getBytes() without a charset uses the platform default,
+            // while Files.write(path, lines) and Files.readAllLines(path) always use UTF-8
             String content = "This is a modern way to write files using Java NIO.\n";
-            Files.write(filePath, content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            
+            Files.write(filePath, content.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
             // Appending lines
             List<String> lines = Arrays.asList("Line 1: Advanced I/O", "Line 2: Efficient and clean");
-            Files.write(filePath, lines, StandardOpenOption.APPEND);
+            Files.write(filePath, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
             
             System.out.println("1. File written successfully: " + filePath.toAbsolutePath());
 
             // 2. Read all lines
             System.out.println("\n2. Reading file content:");
             System.out.println("--------------------------");
-            List<String> readLines = Files.readAllLines(filePath);
+            List<String> readLines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             readLines.forEach(System.out::println);
             System.out.println("--------------------------");
 
@@ -60,6 +65,23 @@ public class ModernFileIO {
             System.out.println("   File exists: " + Files.exists(filePath));
             System.out.println("   Is writable: " + Files.isWritable(filePath));
             System.out.println("   File size: " + Files.size(filePath) + " bytes");
+
+            // 5. Buffered writer/reader with NIO
+            // Files.newBufferedWriter / newBufferedReader give the efficiency of buffering
+            // (see BufferedIO.java) while working with Path objects
+            try (BufferedWriter writer = Files.newBufferedWriter(copyPath, StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
+                writer.write("Line 3: Appended to the copy with a buffered writer");
+                writer.newLine();
+            }
+            System.out.println("\n5. Reading the copy with a buffered reader:");
+            System.out.println("--------------------------");
+            try (BufferedReader reader = Files.newBufferedReader(copyPath, StandardCharsets.UTF_8)) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+            System.out.println("--------------------------");
 
             // Cleanup
             // Files.deleteIfExists(filePath);

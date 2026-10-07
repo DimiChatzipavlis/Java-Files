@@ -47,7 +47,7 @@ This file demonstrates how to handle configuration files (key-value pairs).
 
 ## 2. Advanced Section (Modern NIO.2)
 
-The `advanced` directory focuses on the Non-blocking I/O 2 (NIO.2) API introduced in Java 7 (`java.nio.file`). This is the recommended approach for new Java projects.
+The `advanced` directory focuses on the NIO.2 ("New I/O 2") file API introduced in Java 7 (`java.nio.file`). Despite the "N", these file operations are ordinary blocking calls; non-blocking I/O belongs to the channel/selector part of `java.nio`. This is the recommended approach for new Java projects.
 
 ### `ModernFileIO.java`
 This file showcases the cleaner, more efficient, and exception-safe way to handle files.
@@ -56,10 +56,11 @@ This file showcases the cleaner, more efficient, and exception-safe way to handl
     *   `java.nio.file.Files`: A utility class containing static methods for all common file operations.
     *   `StandardOpenOption`: Enums to specify how files should be opened (CREATE, APPEND, etc.).
 *   **What it does:**
-    1.  Writes text and lists of strings to `example_nio.txt` in one line of code.
+    1.  Writes text and lists of strings (as UTF-8) to `example_nio.txt`, each in one line of code.
     2.  Reads all lines from the file into a List.
     3.  Copies the file to `example_nio_copy.txt`.
-    4.  Checks file attributes (existence, writability).
+    4.  Checks file attributes (existence, writability, size).
+    5.  Appends to the copy with `Files.newBufferedWriter` and reads it back with `Files.newBufferedReader`.
 
 ### `FileTreeWalker.java`
 This file demonstrates how to traverse directory structures recursively, which is complex with legacy I/O but simple with NIO.
@@ -127,5 +128,8 @@ You can run these files using the command line or a terminal in VS Code. The fil
 
 ### Inspecting Output
 *   **BasicFileIO**: Look for `example_basic.txt` in the `normal` folder.
+*   **BufferedIO**: Look for `example_buffered.txt` in the `normal` folder.
+*   **SerializationIO**: Look for the binary file `user_data.ser` in the `normal` folder.
+*   **PropertiesIO**: Look for `config.properties` in the `normal` folder.
 *   **ModernFileIO**: Look for `example_nio.txt` and `example_nio_copy.txt` in the `advanced` folder.
 *   **FileTreeWalker**: Check the terminal output for a list of files in the current directory.
